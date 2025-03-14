@@ -1,0 +1,198 @@
+{
+    "name": "llvm-cfg",
+    "publisher": "JackRoyer",
+    "license": "AGPL-3.0-only",
+    "author": "Jack Royer",
+    "displayName": "LLVM CFG View",
+    "description": "LLVM IR CFG view for Visual Studio Code",
+    "version": "1.1.0",
+    "engines": {
+        "vscode": "^1.63.0"
+    },
+    "contributes": {
+        "menus": {
+            "webview/context": [
+                {
+                    "command": "llvm-cfg.graph-commands.center",
+                    "group": "graph-commands",
+                    "when": "webviewId == 'llvm-cfg.graphView' && webviewSection == 'graph-view'"
+                },
+                {
+                    "command": "llvm-cfg.graph-commands.zoom",
+                    "group": "graph-commands",
+                    "when": "webviewId == 'llvm-cfg.graphView' && webviewSection == 'graph-view'"
+                },
+                {
+                    "command": "llvm-cfg.basicblock-commands.copy",
+                    "group": "basicblock-commands",
+                    "when": "webviewId == 'llvm-cfg.graphView' && webviewSection == 'basicblock-view'"
+                },
+                {
+                    "command": "llvm-cfg.basicblock-commands.goto",
+                    "group": "basicblock-commands",
+                    "when": "webviewId == 'llvm-cfg.graphView' && webviewSection == 'basicblock-view'"
+                },
+                {
+                    "command": "llvm-cfg.basicblock-commands.center",
+                    "group": "basicblock-commands",
+                    "when": "webviewId == 'llvm-cfg.graphView' && webviewSection == 'basicblock-view'"
+                }
+            ],
+            "editor/title": [
+                {
+                    "command": "llvm-cfg.showPreview",
+                    "when": "resourceLangId == llvm",
+                    "group": "navigation"
+                }
+            ],
+            "editor/context": [
+                {
+                    "command": "llvm-cfg.sync-views",
+                    "when": "editorLangId == llvm",
+                    "group": "navigation"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "llvm-cfg.showPreview",
+                "title": "Show Graph View",
+                "icon": "$(triskel-icon)"
+            },
+            {
+                "command": "llvm-cfg.graph-commands.center",
+                "title": "Center graph",
+                "category": "Graph View"
+            },
+            {
+                "command": "llvm-cfg.graph-commands.zoom",
+                "title": "Zoom 100%",
+                "category": "Graph View"
+            },
+            {
+                "command": "llvm-cfg.basicblock-commands.copy",
+                "title": "Copy content",
+                "category": "Basic Block"
+            },
+            {
+                "command": "llvm-cfg.basicblock-commands.goto",
+                "title": "Goto basic block in file",
+                "category": "Basic Block"
+            },
+            {
+                "command": "llvm-cfg.basicblock-commands.center",
+                "title": "Center on basic block",
+                "category": "Basic Block"
+            },
+            {
+                "command": "llvm-cfg.sync-views",
+                "title": "Sync Graph View",
+                "category": "Editor"
+            }
+        ],
+        "icons": {
+            "triskel-icon": {
+                "description": "Triskel icon",
+                "default": {
+                    "fontPath": "assets/triskel-icons.woff",
+                    "fontCharacter": "\\E900"
+                }
+            }
+        },
+        "languages": [
+            {
+                "id": "llvm",
+                "aliases": [
+                    "LLVM",
+                    "llvm"
+                ],
+                "extensions": [
+                    ".ll"
+                ]
+            }
+        ]
+    },
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "browser": "./dist/extension.js",
+    "scripts": {
+        "integration-test": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. --extensionTestsPath=dist/web/test/suite/index.js",
+        "test": "jest",
+        "pretest": "yarn run compile-web",
+        "vscode:prepublish": "yarn run package-web",
+        "compile-web": "webpack",
+        "watch-web": "webpack --watch",
+        "package-web": "webpack --mode production --devtool hidden-source-map",
+        "docs": "typedoc",
+        "lint": "eslint src --ext ts",
+        "lint-staged": "lint-staged",
+        "pretty": "prettier --config .prettierrc 'src/**/*.ts' --write",
+        "format": "eslint src --fix --ext ts && prettier --config .prettierrc 'src/**/*.ts' --write",
+        "run-in-browser": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. .",
+        "prepare": "husky install"
+    },
+    "devDependencies": {
+        "@babel/preset-react": "^7.26.3",
+        "@svgr/webpack": "^8.1.0",
+        "@types/jest-when": "^3.5.0",
+        "@types/mocha": "^9.0.0",
+        "@types/react": "^18.3.18",
+        "@types/react-dom": "^18.3.5",
+        "@types/vscode": "^1.63.0",
+        "@types/webpack-env": "^1.16.3",
+        "@typescript-eslint/eslint-plugin": "^5.9.1",
+        "@typescript-eslint/parser": "^5.9.1",
+        "@vscode/test-web": "^0.0.15",
+        "assert": "^2.0.0",
+        "autoprefixer": "^10.4.21",
+        "css-loader": "^7.1.2",
+        "eslint": "^8.6.0",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "file-loader": "^6.2.0",
+        "glob": "^7.2.0",
+        "gts": "^3.1.0",
+        "husky": "^7.0.4",
+        "jest": "^27.5.1",
+        "jest-mock-vscode": "^0.1.3",
+        "jest-when": "^3.5.1",
+        "lint-staged": ">=10",
+        "mini-css-extract-plugin": "^2.9.2",
+        "mocha": "^9.1.3",
+        "postcss-loader": "^8.1.1",
+        "prettier": "^2.5.1",
+        "process": "^0.11.10",
+        "shiki": "^3.2.1",
+        "style-loader": "^4.0.0",
+        "ts-jest": "^27.1.3",
+        "ts-loader": "^9.2.6",
+        "typedoc": "^0.22.12",
+        "typescript": "^4.5.4",
+        "vsce": "^2.6.7",
+        "webpack": "^5.66.0",
+        "webpack-cli": "^4.9.1"
+    },
+    "lint-staged": {
+        "*.(t|j)s": [
+            "eslint --cache --fix",
+            "prettier --write"
+        ],
+        "*.(json|md)": [
+            "prettier --write"
+        ]
+    },
+    "dependencies": {
+        "@emotion/is-prop-valid": "^1.3.1",
+        "@tailwindcss/postcss": "^4.0.14",
+        "@vscode-elements/react-elements": "^0.9.0",
+        "@vscode/codicons": "^0.0.36",
+        "copy-webpack-plugin": "^13.0.0",
+        "path": "^0.12.7",
+        "postcss": "^8.5.3",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "react-elements": "vscode-elements/react-elements",
+        "tailwindcss": "^4.0.14"
+    }
+}

@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+editor-text {
+    font-family: var(--vscode-editor-font-family);
+    font-weight: var(--vscode-editor-font-weight);
+    font-size: var(--vscode-editor-font-size);
+}
+
+vscode-split-layout {
+    height: 100%;
+    width: 100%;
+}
+
+.insn:focus {
+    background-color: color-mix(in srgb, var(--vscode-foreground) 7%, transparent);
+}
+
+[slot="start"],
+[slot="end"] {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+vscode-tree {
+    width: 100%;
+}
+
+vscode-tree > leaf {
+    padding-left: 10px;
+}
