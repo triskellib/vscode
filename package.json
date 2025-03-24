@@ -6,6 +6,8 @@
     "displayName": "LLVM CFG View",
     "description": "LLVM IR CFG view for Visual Studio Code",
     "version": "1.1.0",
+    "repository": "https://github.com/triskellib/vscode",
+    "icon": "./assets/triskel_dragon.png",
     "engines": {
         "vscode": "^1.63.0"
     },
