@@ -5,7 +5,7 @@
     "author": "Jack Royer",
     "displayName": "LLVM CFG View",
     "description": "LLVM IR CFG view for Visual Studio Code",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "repository": "https://github.com/triskellib/vscode",
     "icon": "./assets/triskel_dragon.png",
     "engines": {
